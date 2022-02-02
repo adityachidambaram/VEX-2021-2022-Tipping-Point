@@ -11,10 +11,12 @@ void setDrive(int left, int right) {
 void setDriveMotors() {
 
   //Input values
+  double speedFactor = 1;
+
   int power = controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
-  power *= 1;
+  power *= speedFactor;
   int direction = controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X);
-  direction *=1;
+  direction *= speedFactor;
 
   //Set velocity to each side
   int left = power + direction;
