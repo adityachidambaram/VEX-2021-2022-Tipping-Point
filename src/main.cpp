@@ -34,7 +34,7 @@ void initialize() {
 	frontRight.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
 	frontLeft.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
 	lift.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
-	rightWing.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+	backHook.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 	clampPiston.set_value(false);
 }
 
@@ -94,7 +94,7 @@ void opcontrol() {
 	while(true) {
 		setDriveMotors();
 		moveLift();
-		moveWing();
+		moveHook();
 		moveClamp();
 		pros::delay(10);
 	}

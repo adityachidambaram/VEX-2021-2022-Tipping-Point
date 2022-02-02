@@ -75,15 +75,15 @@ void moveWing() {
   const int wingSpeed = 127;
 
   if(getLiftUp) {
-    rightWing = wingSpeed;
+    backHook = wingSpeed;
 
   }
   else if(getLiftDown) {
-    rightWing = -wingSpeed;
+    backHook = -wingSpeed;
 
   }
   else {
-    rightWing = 0;
+    backHook = 0;
 
   }
 }

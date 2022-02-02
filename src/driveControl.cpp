@@ -69,21 +69,21 @@ void moveClamp() {
 }
 
 //WING
-void moveWing() {
+void moveHook() {
   bool getLiftUp = controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2);
   bool getLiftDown = controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1);
   const int wingSpeed = 127;
 
   if(getLiftUp) {
-    rightWing = wingSpeed;
+    backHook = wingSpeed;
 
   }
   else if(getLiftDown) {
-    rightWing = -wingSpeed;
+    backHook = -wingSpeed;
 
   }
   else {
-    rightWing = 0;
+    backHook = 0;
 
   }
 }

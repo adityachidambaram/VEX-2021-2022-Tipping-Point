@@ -12,7 +12,7 @@ extern pros::Motor frontRight;
 extern pros::Motor lift;
 
 //back wings motors
-extern pros::Motor rightWing;
+extern pros::Motor backHook;
 
 // clamp piston
 extern pros::ADIDigitalOut clampPiston;
