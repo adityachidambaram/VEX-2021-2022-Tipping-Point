@@ -17,5 +17,7 @@ void moveClamp();
 // wing method
 void moveHook();
 
+void moveBackLift();
+
 // test method
 void test();

@@ -1,5 +1,11 @@
 #include "main.h"
 
+bool open = true;
+double powerMultiplier = 1.5;
+
+int rightMultiplier = 1;
+int leftMultiplier = 1;
+
 //DRIVE
 void setDrive(int left, int right) {
   backLeft = left;
@@ -11,16 +17,15 @@ void setDrive(int left, int right) {
 void setDriveMotors() {
 
   //Input values
-  double speedFactor = 1;
-
   int power = controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
-  power *= speedFactor;
   int direction = controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X);
-  direction *= speedFactor;
+
+
+  power *= powerMultiplier;
 
   //Set velocity to each side
-  int left = power + direction;
-  int right = power - direction;
+  int left = power + (direction * leftMultiplier);
+  int right = power - (direction * rightMultiplier);
 
   //Reverse turns for backwards driving
   /*
@@ -31,9 +36,9 @@ void setDriveMotors() {
 
   // Set power to both sides of chassis
   //Setting deadzones
-  if (abs(power) <= 40)
+  if (abs(power) <= 20)
     setDrive(0, 0);
-  if(abs(direction) <= 40)
+  if(abs(direction) <= 20)
     setDrive(0, 0);
 
   setDrive(left, right);
@@ -64,16 +69,17 @@ void moveClamp() {
   if(isAPressed) {
     //open = !open;
     clampPiston.set_value(false);
+    //pros::delay(100);
   }
   if(isBPressed) {
-    clampPiston.set_value(true);
-  }
+     clampPiston.set_value(true);
+   }
 }
 
 //WING
 void moveHook() {
-  bool getLiftUp = controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2);
-  bool getLiftDown = controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1);
+  bool getLiftUp = controller.get_digital(pros::E_CONTROLLER_DIGITAL_UP);
+  bool getLiftDown = controller.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN);
   const int wingSpeed = 127;
 
   if(getLiftUp) {
@@ -87,6 +93,22 @@ void moveHook() {
   else {
     backHook = 0;
 
+  }
+}
+
+void moveBackLift() {
+  bool getLiftUp = controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2);
+  bool getLiftDown = controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1);
+  const int liftSpeed = 115;
+
+  if(getLiftUp) {
+    backLift = liftSpeed;
+  }
+  else if(getLiftDown) {
+    backLift = -liftSpeed;
+  }
+  else {
+    backLift = 0;
   }
 }
 
