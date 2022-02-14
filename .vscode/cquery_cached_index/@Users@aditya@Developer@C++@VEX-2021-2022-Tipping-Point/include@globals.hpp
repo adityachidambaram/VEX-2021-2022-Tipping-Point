@@ -12,10 +12,12 @@ extern pros::Motor frontRight;
 extern pros::Motor lift;
 
 //back wings motors
-extern pros::Motor backHook;
 extern pros::Motor backLift;
 // clamp piston
 extern pros::ADIDigitalOut clampPiston;
+
+// Sensors
+extern pros::Imu inertial;
 
 //auton switcher
 

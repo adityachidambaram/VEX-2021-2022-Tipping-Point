@@ -2,8 +2,13 @@
 
 //CONTROLLS
 
-//helper functions
+// helper method
 void setDrive(int left, int right);
+
+void resetMotorEncoders();
+double getRightEncoder();
+double getLeftEncoder();
+double getAvgEncoder();
 
 // motor method
 void setDriveMotors();

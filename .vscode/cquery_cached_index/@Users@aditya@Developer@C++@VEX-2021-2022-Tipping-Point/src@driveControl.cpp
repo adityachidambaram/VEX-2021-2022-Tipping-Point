@@ -1,7 +1,7 @@
 #include "main.h"
 
 bool open = true;
-double powerMultiplier = 1.5;
+int powerMultiplier = 1;
 
 int rightMultiplier = 1;
 int leftMultiplier = 1;
@@ -14,11 +14,31 @@ void setDrive(int left, int right) {
   frontRight = right;
 }
 
+void resetMotorEncoders() {
+  backLeft.tare_position();
+  backRight.tare_position();
+  frontRight.tare_position();
+  frontLeft.tare_position();
+}
+
+double getRightEncoder() {
+  return (fabs(backRight.get_position()) + fabs(frontRight.get_position())) / 2;
+}
+
+double getLeftEncoder() {
+  return (fabs(frontLeft.get_position()) + fabs(backLeft.get_position())) / 2;
+}
+
+double getAvgEncoder() {
+  return (fabs(backRight.get_position()) + fabs(backLeft.get_position()) +
+         fabs(frontRight.get_position()) + fabs(frontLeft.get_position())) / 4;
+}
+
 void setDriveMotors() {
 
   //Input values
-  int power = controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
-  int direction = controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X);
+  double power = controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
+  double direction = controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X);
 
 
   power *= powerMultiplier;
@@ -77,6 +97,8 @@ void moveClamp() {
 }
 
 //WING
+
+/*
 void moveHook() {
   bool getLiftUp = controller.get_digital(pros::E_CONTROLLER_DIGITAL_UP);
   bool getLiftDown = controller.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN);
@@ -95,6 +117,7 @@ void moveHook() {
 
   }
 }
+*/
 
 void moveBackLift() {
   bool getLiftUp = controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2);

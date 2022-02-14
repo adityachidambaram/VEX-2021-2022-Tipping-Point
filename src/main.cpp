@@ -33,10 +33,13 @@ void initialize() {
 	backRight.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
 	frontRight.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
 	frontLeft.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+
 	lift.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
-	backHook.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 	backLift.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+
 	clampPiston.set_value(false);
+
+	inertial.reset();
 }
 
 
@@ -73,8 +76,8 @@ void competition_initialize() {
 
 
 void autonomous() {
-	//forwardClamp();
 	forwardClamp();
+	//forwardAWP();
 }
 
 
@@ -96,7 +99,6 @@ void opcontrol() {
 	while(true) {
 		setDriveMotors();
 		moveLift();
-		moveHook();
 		moveClamp();
 		moveBackLift();
 		pros::delay(10);

@@ -3,8 +3,11 @@ using namespace okapi;
 
 extern std::shared_ptr<ChassisController> chassis;
 
-void forward();
+extern okapi::Motor backWing;
 
-void rightAWP();
+void translate(int units, int voltage);
+void turn(int degrees, int voltage);
 
 void forwardClamp();
+
+void forwardAWP();
