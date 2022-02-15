@@ -41,6 +41,7 @@
 #include "driverControl.hpp"
 #include "autonControl.hpp"
 #include "globals.hpp"
+#include "autonMethods.hpp"
 
 
 using namespace pros;

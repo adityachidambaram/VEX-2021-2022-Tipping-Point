@@ -2,8 +2,6 @@
 
 okapi::Motor backWing(9);
 
-
-
 void forwardClamp() {
   translate(590, 250);
   pros::delay(490);
@@ -12,12 +10,9 @@ void forwardClamp() {
 
   translate(-575, 90);
   pros::delay(100);
-
-
 }
 
 void forwardAWP() {
-
   backWing.moveRelative(0.75, 100);
   pros::delay(750);
   backWing.moveRelative(-0.75, 100);
@@ -33,8 +28,4 @@ void forwardAWP() {
 
   translate(-500, 90);
   pros::delay(100);
-
-
-
-
 }
