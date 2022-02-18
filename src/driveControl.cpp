@@ -47,12 +47,6 @@ void setDriveMotors() {
   int left = power + (direction * leftMultiplier);
   int right = power - (direction * rightMultiplier);
 
-  //Reverse turns for backwards driving
-  /*
-  if(power < 0) {
-    left = power - direction;
-    right = power + direction;
-  }*/
 
   // Set power to both sides of chassis
   //Setting deadzones
