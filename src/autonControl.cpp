@@ -3,12 +3,12 @@
 okapi::Motor backWing(9);
 
 void forwardClamp() {
-  translate(590, 250);
-  pros::delay(490);
+  translate(575, 150);
+  pros::delay(520);
   clampPiston.set_value(true);
   pros::delay(100);
 
-  translate(-575, 90);
+  translate(-540, 90);
   pros::delay(100);
 }
 

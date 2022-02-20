@@ -24,5 +24,7 @@ void moveHook();
 
 void moveBackLift();
 
+void intakeMove();
+
 // test method
 void test();

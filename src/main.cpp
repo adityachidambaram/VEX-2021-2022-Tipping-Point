@@ -29,26 +29,39 @@ void initialize() {
 	pros::lcd::set_text(1, "Hi monkey ");
 	pros::lcd::register_btn1_cb(on_center_button);
 
-	backLeft.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
-	backRight.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
-	frontRight.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
-	frontLeft.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+
+	backLeft.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+	backRight.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+	frontRight.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+	frontLeft.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 
 	lift.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+
+	backLift.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+	lift.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+
 	backLift.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 
 	clampPiston.set_value(false);
+	actuator.set_value(true);
+    backPiston.set_value(false);
 
 	inertial.reset();
 }
 
 
 void disabled() {
-	/**
-	 * Runs while the robot is in the disabled state of Field Management System or
-	 * the VEX Competition Switch, following either autonomous or opcontrol. When
-	 * the robot is enabled, this task will exit.
-	 */
+	backLeft.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+	backRight.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+	frontRight.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+	frontLeft.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+
+	lift.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+
+	backLift.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+	lift.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+
+	backLift.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 }
 
 
@@ -70,6 +83,9 @@ void competition_initialize() {
 
 	pros::lcd::set_text(1, "No auton currently selected.");
 	clampPiston.set_value(false);
+	actuator.set_value(true);
+    backPiston.set_value(false);
+
 
 
 }
@@ -77,7 +93,6 @@ void competition_initialize() {
 
 void autonomous() {
 	forwardClamp();
-	//forwardAWP();
 }
 
 
@@ -101,6 +116,7 @@ void opcontrol() {
 		moveLift();
 		moveClamp();
 		moveBackLift();
+		//intakeMove();
 		pros::delay(10);
 	}
 }

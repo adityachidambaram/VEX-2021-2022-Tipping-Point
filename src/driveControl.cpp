@@ -1,7 +1,7 @@
 #include "main.h"
 
 bool open = true;
-int powerMultiplier = 1;
+int powerMultiplier = 2;
 
 int rightMultiplier = 1;
 int leftMultiplier = 1;
@@ -81,53 +81,61 @@ void moveClamp() {
   bool isBPressed = controller.get_digital(pros::E_CONTROLLER_DIGITAL_B);
 
   if(isAPressed) {
-    //open = !open;
     clampPiston.set_value(false);
-    //pros::delay(100);
   }
   if(isBPressed) {
      clampPiston.set_value(true);
    }
 }
 
-//WING
-
-/*
-void moveHook() {
-  bool getLiftUp = controller.get_digital(pros::E_CONTROLLER_DIGITAL_UP);
-  bool getLiftDown = controller.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN);
-  const int wingSpeed = 127;
-
-  if(getLiftUp) {
-    backHook = wingSpeed;
-
-  }
-  else if(getLiftDown) {
-    backHook = -wingSpeed;
-
-  }
-  else {
-    backHook = 0;
-
-  }
-}
-*/
-
 void moveBackLift() {
   bool getLiftUp = controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2);
   bool getLiftDown = controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1);
-  const int liftSpeed = 115;
 
+/*
   if(getLiftUp) {
-    backLift = liftSpeed;
+    backPiston.set_value(true);
+    pros::delay(200);
+    actuator.set_value(false);
   }
+
   else if(getLiftDown) {
-    backLift = -liftSpeed;
-  }
-  else {
-    backLift = 0;
-  }
+    actuator.set_value(true);
+    pros::delay(200);
+    backPiston.set_value(false);
+  }   
+  */
+   
+   if(getLiftUp) {
+     backLift = 115;
+   }
+   else if(getLiftDown) {
+     backLift = -115;
+   }
+   else {
+     backLift = 0;
+   }
+  
 }
+/*
+void intakeMove() {
+  bool on = controller.get_digital(pros::E_CONTROLLER_DIGITAL_UP);
+  bool off = controller.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN);
+  const int liftSpeed = 115;
+  bool running = false;
+  if(on) {
+    running = true;
+  }
+  if(off) {
+    running = false;
+  }
+
+  while(running) {
+    intake = liftSpeed;
+  }
+  
+}
+*/
 
 //TESTING
 void test()
