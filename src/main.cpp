@@ -117,6 +117,7 @@ void opcontrol() {
 		moveClamp();
 		moveBackLift();
 		//intakeMove();
+		test();
 		pros::delay(10);
 	}
 }

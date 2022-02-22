@@ -152,5 +152,24 @@ void intakeMove() {
 //TESTING
 void test()
 {
-  
+  bool x = controller.get_digital(pros::E_CONTROLLER_DIGITAL_UP);
+  bool y = controller.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN);
+
+  bool a = controller.get_digital(pros::E_CONTROLLER_DIGITAL_LEFT);
+  bool b = controller.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT);
+
+  if(x) {
+    backPiston.set_value(true);
+  }
+  else if(y) {
+    backPiston.set_value(false);
+  }
+
+  if(a) {
+    actuator.set_value(false);
+  }
+  if(b) {
+    actuator.set_value(true);
+  }
+
 }
