@@ -1,19 +1,29 @@
 #include "main.h"
 
+// STATE VARIABLES 
 bool open = true;
-int powerMultiplier = 2;
 
-int rightMultiplier = 1;
-int leftMultiplier = 1;
+// CONSTANTS
+const double powerMultiplier = 2.00;
+const double rightMultiplier = 1.00;
+const double leftMultiplier = 1.00;
 
-//DRIVE
+// MOTOR POWER
 void setDrive(int left, int right) {
+
+  // MAIN MOTORS
   backLeft = left;
   backRight = right;
+
   frontLeft = left;
   frontRight = right;
+
+  // ADDITIONAL MOTORS
+  rightTop = right;
+  leftTop = left;
 }
 
+// RESET ENCODERS
 void resetMotorEncoders() {
   backLeft.tare_position();
   backRight.tare_position();
@@ -21,6 +31,7 @@ void resetMotorEncoders() {
   frontLeft.tare_position();
 }
 
+// GET ENCODER VALUES
 double getRightEncoder() {
   return (fabs(backRight.get_position()) + fabs(frontRight.get_position())) / 2;
 }
@@ -34,31 +45,31 @@ double getAvgEncoder() {
          fabs(frontRight.get_position()) + fabs(frontLeft.get_position())) / 4;
 }
 
+// CONTROLLER INPUT 
 void setDriveMotors() {
 
-  //Input values
+  // INPUT VALUES
   double power = controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
   double direction = controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X);
 
 
   power *= powerMultiplier;
 
-  //Set velocity to each side
+  // MOTOR POWER EQUATION
   int left = power + (direction * leftMultiplier);
   int right = power - (direction * rightMultiplier);
 
-
-  // Set power to both sides of chassis
-  //Setting deadzones
+  // DEADZONES
   if (abs(power) <= 20)
     setDrive(0, 0);
   if(abs(direction) <= 20)
     setDrive(0, 0);
 
+  // SET MOTOR POWER
   setDrive(left, right);
 }
 
-//LIFT
+// LIFT
 void moveLift() {
   bool getLiftUp = controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1);
   bool getLiftDown = controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2);
@@ -75,7 +86,7 @@ void moveLift() {
   }
 }
 
-//CLAMP
+// CLAMP
 void moveClamp() {
   bool isAPressed = controller.get_digital(pros::E_CONTROLLER_DIGITAL_A);
   bool isBPressed = controller.get_digital(pros::E_CONTROLLER_DIGITAL_B);
@@ -88,6 +99,7 @@ void moveClamp() {
    }
 }
 
+// BACK LIFT
 void moveBackLift() {
   bool getLiftUp = controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2);
   bool getLiftDown = controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1);
@@ -140,5 +152,5 @@ void intakeMove() {
 //TESTING
 void test()
 {
-  //
+  
 }
