@@ -69,10 +69,10 @@ void PID::reset() {
 
 void driveDistancePID(PID distancePID, double target) {
   int direction = abs(target) / target;
-  resetDriveEncoders();
+  resetMotorEncoders();
 
-  while(avgDriveEncoderValue() < abs(target)) {
-    double drivePos = avgDriveEncoderValue();
+  while(getAvgEncoder() < abs(target)) {
+    double drivePos = getAvgEncoder();
 
     double drivePower = distancePID.calculate(target, drivePos);
 
@@ -88,11 +88,11 @@ void driveDistancePID(PID distancePID, double target) {
 
 void turnAnglePID(PID anglePID, double target) {
   int direction = abs(target) / target;
-  resetDriveEncoders();
-  inertSensor.reset();
+  resetMotorEncoders();
+  inertial.reset();
 
-  while(inertSensor.get_rotation() < abs(target)) {
-    double drivePower = anglePID.calculate(abs(target), inertSensor.get_rotation());
+  while(inertial.get_rotation() < abs(target)) {
+    double drivePower = anglePID.calculate(abs(target), inertial.get_rotation());
 
     double leftPower = direction * drivePower;
     double rightPower = -direction * drivePower;
