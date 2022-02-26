@@ -101,5 +101,5 @@ void turnAnglePID(PID anglePID, double target) {
     pros::delay(10);
   }
 
-  distancePID.reset();
+  anglePID.reset();
 }

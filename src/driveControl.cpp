@@ -94,9 +94,10 @@ void moveClamp() {
   if(isAPressed) {
     clampPiston.set_value(false);
   }
+  
   if(isBPressed) {
      clampPiston.set_value(true);
-   }
+  }
 }
 
 // BACK LIFT
