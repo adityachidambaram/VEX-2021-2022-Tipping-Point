@@ -32,4 +32,3 @@ pros::Controller controller(pros::E_CONTROLLER_MASTER);
 
 // MISC
 int autonState = 0;
-bool intakeRunning = false;

@@ -1,7 +1,8 @@
 #include "main.h"
 
 // STATE VARIABLES 
-bool open = true;
+bool running = true;
+
 
 // CONSTANTS
 const double powerMultiplier = 2.00;
@@ -105,7 +106,7 @@ void moveBackLift() {
   bool getLiftUp = controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2);
   bool getLiftDown = controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1);
 
-/*
+
   if(getLiftUp) {
     backPiston.set_value(true);
     pros::delay(200);
@@ -117,34 +118,20 @@ void moveBackLift() {
     pros::delay(200);
     backPiston.set_value(false);
   }   
-  */
-   
-   if(getLiftUp) {
-     backLift = 115;
-   }
-   else if(getLiftDown) {
-     backLift = -115;
-   }
-   else {
-     backLift = 0;
-   }
-  
+
 }
 
 void intakeMove() {
   bool on = controller.get_digital(pros::E_CONTROLLER_DIGITAL_X);
-  bool off = controller.get_digital(pros::E_CONTROLLER_DIGITAL_Y);
 
-  const int intakeSpeed = 127;
+  const int intakeSpeed = -127;
 
   if(on) {
-    intakeRunning = true;
-  } else if(off) {
-    std::cout << "Lifted";
-    intakeRunning = false;
-  }
+    running = !running;
+    delay(1000);
+  } 
 
-  if(intakeRunning) {
+  if(running) {
     intake = -intakeSpeed;
   }
 }
@@ -153,6 +140,7 @@ void intakeMove() {
 //TESTING
 void test()
 {
+  /*
   bool x = controller.get_digital(pros::E_CONTROLLER_DIGITAL_UP);
   bool y = controller.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN);
 
@@ -173,5 +161,6 @@ void test()
   if(b) {
     actuator.set_value(true);
   }
+  */
 
 }
