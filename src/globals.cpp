@@ -24,6 +24,9 @@ pros::ADIDigitalOut actuator('D');
 #define DIGITAL_SENSOR_PORT 'A'
 pros::ADIDigitalOut clampPiston('A');
 
+#define DIGITAL_SENSOR_PORT 'H'
+pros::ADIButton autonSelector ('H');
+
 // SENSORS
 pros::Imu inertial(8);
 

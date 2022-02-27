@@ -1,7 +1,8 @@
 #include "main.h"
 
 // STATE VARIABLES 
-bool running = true;
+bool runningIn = false;
+bool runningOff = false;
 
 
 // CONSTANTS
@@ -122,17 +123,26 @@ void moveBackLift() {
 }
 
 void intakeMove() {
-  bool on = controller.get_digital(pros::E_CONTROLLER_DIGITAL_X);
+  bool in = controller.get_digital(pros::E_CONTROLLER_DIGITAL_X);
+  bool off = controller.get_digital(pros::E_CONTROLLER_DIGITAL_Y);
 
   const int intakeSpeed = -127;
 
-  if(on) {
-    running = !running;
-    delay(1000);
+  if(in) {
+    runningIn = !runningIn;
+    delay(200);
+  } 
+  else if(off) {
+    runningIn = false;
+    intake = -intakeSpeed;
   } 
 
-  if(running) {
-    intake = -intakeSpeed;
+
+  if(runningIn) {
+    intake = intakeSpeed;
+  }
+  else {
+    intake = 0;
   }
 }
 
@@ -140,7 +150,7 @@ void intakeMove() {
 //TESTING
 void test()
 {
-  /*
+  
   bool x = controller.get_digital(pros::E_CONTROLLER_DIGITAL_UP);
   bool y = controller.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN);
 
@@ -161,6 +171,6 @@ void test()
   if(b) {
     actuator.set_value(true);
   }
-  */
+  
 
 }

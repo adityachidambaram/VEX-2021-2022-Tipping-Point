@@ -47,6 +47,8 @@ void initialize() {
     backPiston.set_value(false);
 
 	inertial.reset();
+
+	
 }
 
 
@@ -63,10 +65,9 @@ void disabled() {
 
 	backLift.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 
-	intakeRunning = false;
 }
 
-
+//pros::ADIButton switch2('H');
 void competition_initialize() {
 	/**
 	 * Runs after initialize(), and before autonomous when connected to the Field
@@ -87,7 +88,11 @@ void competition_initialize() {
 	clampPiston.set_value(false);
 	actuator.set_value(true);
     backPiston.set_value(false);
-}
+
+	//if(switch2.isPressed()) {
+
+	//}
+ }
 
 
 void autonomous() {

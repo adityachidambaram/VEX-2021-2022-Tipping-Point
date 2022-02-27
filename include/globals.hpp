@@ -19,6 +19,7 @@ extern pros::Motor intake;
 extern pros::ADIDigitalOut clampPiston;
 extern pros::ADIDigitalOut backPiston;
 extern pros::ADIDigitalOut actuator;
+extern  pros::ADIButton autonSelector;
 
 // SENSORS
 extern pros::Imu inertial;
