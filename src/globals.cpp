@@ -14,13 +14,13 @@ pros::Motor lift(15, pros::E_MOTOR_GEARSET_18, true, pros::E_MOTOR_ENCODER_ROTAT
 
 pros::Motor backLift(5, pros::E_MOTOR_GEARSET_18, true, pros::E_MOTOR_ENCODER_ROTATIONS);
 
-//pros::Motor intake(1, pros::E_MOTOR_GEARSET_18, true, pros::E_MOTOR_ENCODER_ROTATIONS);
+pros::Motor intake(6, pros::E_MOTOR_GEARSET_18, true, pros::E_MOTOR_ENCODER_ROTATIONS);
 
 // PNEUMATICS
 #define DIGITAL_SENSOR_PORT 'B'
 pros::ADIDigitalOut backPiston('B');
-#define DIGITAL_SENSOR_PORT 'C'
-pros::ADIDigitalOut actuator('C');
+#define DIGITAL_SENSOR_PORT 'D'
+pros::ADIDigitalOut actuator('D');
 #define DIGITAL_SENSOR_PORT 'A'
 pros::ADIDigitalOut clampPiston('A');
 
@@ -32,3 +32,4 @@ pros::Controller controller(pros::E_CONTROLLER_MASTER);
 
 // MISC
 int autonState = 0;
+bool intakeRunning = false;

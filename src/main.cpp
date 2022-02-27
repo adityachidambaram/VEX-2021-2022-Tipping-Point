@@ -62,6 +62,8 @@ void disabled() {
 	lift.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 
 	backLift.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+
+	intakeRunning = false;
 }
 
 
@@ -85,9 +87,6 @@ void competition_initialize() {
 	clampPiston.set_value(false);
 	actuator.set_value(true);
     backPiston.set_value(false);
-
-
-
 }
 
 
@@ -116,7 +115,7 @@ void opcontrol() {
 		moveLift();
 		moveClamp();
 		moveBackLift();
-		//intakeMove();
+		intakeMove();
 		test();
 		pros::delay(10);
 	}

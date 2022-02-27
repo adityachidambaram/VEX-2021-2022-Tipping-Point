@@ -13,7 +13,7 @@ extern pros::Motor leftTop;
 extern pros::Motor lift;
 extern pros::Motor backLift;
 
-//extern pros::Motor intake;
+extern pros::Motor intake;
 
 // PNEUMATICS
 extern pros::ADIDigitalOut clampPiston;
@@ -29,3 +29,4 @@ extern pros::Controller controller;
 // MISC
 extern int autonState;
 extern bool open;
+extern bool intakeRunning;

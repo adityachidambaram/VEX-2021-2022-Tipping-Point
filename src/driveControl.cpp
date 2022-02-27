@@ -130,25 +130,25 @@ void moveBackLift() {
    }
   
 }
-/*
+
 void intakeMove() {
-  bool on = controller.get_digital(pros::E_CONTROLLER_DIGITAL_UP);
-  bool off = controller.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN);
-  const int liftSpeed = 115;
-  bool running = false;
+  bool on = controller.get_digital(pros::E_CONTROLLER_DIGITAL_X);
+  bool off = controller.get_digital(pros::E_CONTROLLER_DIGITAL_Y);
+
+  const int intakeSpeed = 127;
+
   if(on) {
-    running = true;
-  }
-  if(off) {
-    running = false;
+    intakeRunning = true;
+  } else if(off) {
+    std::cout << "Lifted";
+    intakeRunning = false;
   }
 
-  while(running) {
-    intake = liftSpeed;
+  if(intakeRunning) {
+    intake = -intakeSpeed;
   }
-  
 }
-*/
+
 
 //TESTING
 void test()
@@ -158,6 +158,7 @@ void test()
 
   bool a = controller.get_digital(pros::E_CONTROLLER_DIGITAL_LEFT);
   bool b = controller.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT);
+
 
   if(x) {
     backPiston.set_value(true);

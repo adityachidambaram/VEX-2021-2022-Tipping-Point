@@ -1,4 +1,4 @@
-bin/autonControl.cpp.o: src/autonControl.cpp include/main.h include/api.h \
+bin/pid.cpp.o: src/pid.cpp include/main.h include/api.h \
  include/pros/adi.h include/pros/colors.h include/pros/distance.h \
  include/pros/ext_adi.h include/pros/adi.h include/pros/adi.h \
  include/pros/gps.h include/pros/imu.h include/pros/llemu.h \
