@@ -1,12 +1,12 @@
 #include "main.h"
 
 // STATE VARIABLES 
+bool actuatorValue = false;
+bool backPistonValue = false;
 bool runningIn = false;
-bool runningOff = false;
-
 
 // CONSTANTS
-const double powerMultiplier = 2.00;
+const double powerMultiplier = 1.00;
 const double rightMultiplier = 1.00;
 const double leftMultiplier = 1.00;
 
@@ -54,7 +54,6 @@ void setDriveMotors() {
   double power = controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
   double direction = controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X);
 
-
   power *= powerMultiplier;
 
   // MOTOR POWER EQUATION
@@ -75,7 +74,7 @@ void setDriveMotors() {
 void moveLift() {
   bool getLiftUp = controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1);
   bool getLiftDown = controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2);
-  const int liftSpeed = 115;
+  const int liftSpeed = 100;
 
   if(getLiftUp) {
     lift = liftSpeed;
@@ -90,8 +89,8 @@ void moveLift() {
 
 // CLAMP
 void moveClamp() {
-  bool isAPressed = controller.get_digital(pros::E_CONTROLLER_DIGITAL_A);
-  bool isBPressed = controller.get_digital(pros::E_CONTROLLER_DIGITAL_B);
+  bool isAPressed = controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1);
+  bool isBPressed = controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2);
 
   if(isAPressed) {
     clampPiston.set_value(false);
@@ -104,53 +103,45 @@ void moveClamp() {
 
 // BACK LIFT
 void moveBackLift() {
-  bool getLiftUp = controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2);
-  bool getLiftDown = controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1);
+  bool clampControl = controller.get_digital(pros::E_CONTROLLER_DIGITAL_X);
+  bool actControl = controller.get_digital(pros::E_CONTROLLER_DIGITAL_UP);
 
+  if(actControl) {
+    actuator.set_value(!actuatorValue);
+    pros::delay(20);
+    actuatorValue = !actuatorValue;
+  } 
 
-  if(getLiftUp) {
-    backPiston.set_value(true);
-    pros::delay(200);
-    actuator.set_value(false);
+  if(clampControl) {
+    backPiston.set_value(!backPistonValue);
+    pros::delay(20);
+    backPistonValue = !backPistonValue;
   }
-
-  else if(getLiftDown) {
-    actuator.set_value(true);
-    pros::delay(200);
-    backPiston.set_value(false);
-  }   
-
 }
 
 void intakeMove() {
-  bool in = controller.get_digital(pros::E_CONTROLLER_DIGITAL_X);
-  bool off = controller.get_digital(pros::E_CONTROLLER_DIGITAL_Y);
+  bool in = controller.get_digital(pros::E_CONTROLLER_DIGITAL_B);
+  bool off = controller.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN);
 
-  const int intakeSpeed = -127;
+  const int intakeSpeed = 127;
 
   if(in) {
-    runningIn = !runningIn;
-    delay(200);
-  } 
-  else if(off) {
+    runningIn = true;
+  } else if(off) {
     runningIn = false;
-    intake = -intakeSpeed;
   } 
-
 
   if(runningIn) {
     intake = intakeSpeed;
-  }
-  else {
+  } else {
     intake = 0;
   }
 }
 
-
 //TESTING
 void test()
-{
-  
+{ 
+  /*
   bool x = controller.get_digital(pros::E_CONTROLLER_DIGITAL_UP);
   bool y = controller.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN);
 
@@ -171,6 +162,5 @@ void test()
   if(b) {
     actuator.set_value(true);
   }
-  
-
+  */
 }

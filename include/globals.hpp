@@ -30,4 +30,3 @@ extern pros::Controller controller;
 // MISC
 extern int autonState;
 extern bool open;
-extern bool intakeRunning;
