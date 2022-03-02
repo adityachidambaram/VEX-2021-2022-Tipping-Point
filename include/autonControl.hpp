@@ -6,3 +6,5 @@ extern okapi::Motor backWing;
 void forwardClamp();
 
 void forwardAWP();
+
+void progSkill();

@@ -3,6 +3,10 @@
 // STATE VARIABLES 
 bool actuatorValue = false;
 bool backPistonValue = false;
+
+bool clampOn = false;
+bool actOn = false;
+
 bool runningIn = false;
 
 // CONSTANTS
@@ -106,16 +110,26 @@ void moveBackLift() {
   bool clampControl = controller.get_digital(pros::E_CONTROLLER_DIGITAL_X);
   bool actControl = controller.get_digital(pros::E_CONTROLLER_DIGITAL_UP);
 
-  if(actControl) {
-    actuator.set_value(!actuatorValue);
-    pros::delay(20);
-    actuatorValue = !actuatorValue;
+  if(clampControl && !clampOn) {
+    clampOn = true;
+  }
+
+  if(actControl && !actOn) {
+    actOn = true;
   } 
 
-  if(clampControl) {
+  if(actOn) {
+    actuator.set_value(!actuatorValue);
+    pros::delay(200);
+    actuatorValue = !actuatorValue;
+    actOn = false;
+  } 
+
+  if(clampOn) {
     backPiston.set_value(!backPistonValue);
-    pros::delay(20);
+    pros::delay(200);
     backPistonValue = !backPistonValue;
+    clampOn = false;
   }
 }
 

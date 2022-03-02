@@ -1,5 +1,8 @@
 #include "main.h"
 
+// Left --> -20, -21, 18
+// Right --> 4, 7, -5
+
 // MOTORS
 pros::Motor backRight(7, pros::E_MOTOR_GEARSET_18, false, pros::E_MOTOR_ENCODER_DEGREES); // *
 pros::Motor backLeft(21, pros::E_MOTOR_GEARSET_18, true, pros::E_MOTOR_ENCODER_DEGREES); // *
@@ -17,18 +20,16 @@ pros::Motor backLift(5, pros::E_MOTOR_GEARSET_18, true, pros::E_MOTOR_ENCODER_RO
 pros::Motor intake(6, pros::E_MOTOR_GEARSET_18, false, pros::E_MOTOR_ENCODER_ROTATIONS); // *
 
 // PNEUMATICS
-#define DIGITAL_SENSOR_PORT 'D'
-pros::ADIDigitalOut backPiston('D');
+#define DIGITAL_SENSOR_PORT 'A'
+pros::ADIDigitalOut backPiston('A');
 #define DIGITAL_SENSOR_PORT 'E'
 pros::ADIDigitalOut actuator('E');
-#define DIGITAL_SENSOR_PORT 'A'
-pros::ADIDigitalOut clampPiston('A');
-
 #define DIGITAL_SENSOR_PORT 'H'
-pros::ADIButton autonSelector ('H');
+pros::ADIDigitalOut clampPiston('H');
+
 
 // SENSORS
-pros::Imu inertial(8);
+pros::Imu inertial(11);
 
 // CONTROLLER
 pros::Controller controller(pros::E_CONTROLLER_MASTER);

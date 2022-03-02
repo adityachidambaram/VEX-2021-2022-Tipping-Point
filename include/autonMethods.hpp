@@ -6,4 +6,6 @@ void translateInertial(int units, int voltage);
 
 void turn(int degrees, int voltage);
 
-void turnIntertial(int degrees, int voltage);
+void turnInertial(int degrees, int voltage);
+
+void gyroPID(double angle);

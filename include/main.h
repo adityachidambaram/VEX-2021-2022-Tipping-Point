@@ -71,6 +71,7 @@ void opcontrol(void);
  */
 #include "driverControl.hpp"
 #include "autonControl.hpp"
+#include "autonMethods.hpp"
 #include "globals.hpp"
 #include "pid.hpp"
 

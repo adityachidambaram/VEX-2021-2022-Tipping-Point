@@ -30,10 +30,10 @@ void initialize() {
 	pros::lcd::register_btn1_cb(on_center_button);
 
 
-	backLeft.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
-	backRight.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
-	frontRight.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
-	frontLeft.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+	backLeft.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+	backRight.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+	frontRight.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+	frontLeft.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 
 	lift.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 
@@ -90,8 +90,8 @@ void competition_initialize() {
 
 
 void autonomous() {
-	forwardClamp();
-}
+	progSkill();
+} 
 
 
 void opcontrol() {
