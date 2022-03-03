@@ -58,8 +58,6 @@ void disabled() {
 
 	lift.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 
-	backLift.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
-	lift.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 
 	backLift.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 }

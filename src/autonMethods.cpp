@@ -64,44 +64,6 @@ void turn(int units, int voltage) {
   setDrive(0, 0);
 }
 
-void gyroPID(double angle){
-
-	double threshold;
-	if(angle <= 0.0){
-		threshold = 1.5;
-	}
-	else{
-		threshold = 0.7;
-	}
-
-	double error = angle - inertial.get_rotation();
-	double integral;
-	double derivative;
-	double prevError;
-	double kp = 0.98;
-	double ki = 0.001;
-	double kd = 5.5;
-
-	while(fabs(error) > threshold){
-		error = angle - inertial.get_rotation();
-		integral  = integral + error;
-		if(error == 0 || fabs(error) >= angle){
-			integral = 0;
-		}
-		derivative = error - prevError;
-		prevError = error;
-		double p = error * kp;
-		double i = integral * ki;
-		double d = derivative * kd;
-
-		double vel = p + i + d;
-
-		setDrive(vel, -vel);
-
-		pros::delay(15);
-	}
-}
-
 
 
 
