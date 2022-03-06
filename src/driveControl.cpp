@@ -6,13 +6,18 @@ bool backPistonValue = false;
 
 bool clampOn = false;
 bool actOn = false;
-
+bool outtake = false;
+bool clampSwitchAllowed = false;
 bool runningIn = false;
+bool outAllowed = false;
+bool boostOn = false;
 
 // CONSTANTS
-const double powerMultiplier = 1.00;
+double powerMultiplier = 1.00;
 const double rightMultiplier = 1.00;
 const double leftMultiplier = 1.00;
+
+int intakeSpeed = 140;
 
 // MOTOR POWER
 void setDrive(int left, int right) {
@@ -57,7 +62,28 @@ void setDriveMotors() {
   // INPUT VALUES
   double power = controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
   double direction = controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X);
+  
+  double boost = controller.get_digital(pros::E_CONTROLLER_DIGITAL_B);
 
+  // BOOST CODE
+
+  
+  if(boost && !boostOn) {
+    boostOn = true;
+  }
+
+  if(boostOn && powerMultiplier == 1.00) {
+    powerMultiplier = 1.80;
+    pros::delay(125);
+    boostOn = false;
+  } else if(boostOn && powerMultiplier == 1.80) {
+    powerMultiplier = 1.00;
+    pros::delay(125);
+    boostOn = false;
+  } 
+  
+
+  // POWER MULTIPLIER
   power *= powerMultiplier;
 
   // MOTOR POWER EQUATION
@@ -67,7 +93,7 @@ void setDriveMotors() {
   // DEADZONES
   if (abs(power) <= 20)
     setDrive(0, 0);
-  if(abs(direction) <= 20)
+  if (abs(direction) <= 20)
     setDrive(0, 0);
 
   // SET MOTOR POWER
@@ -108,41 +134,51 @@ void moveClamp() {
 // BACK LIFT
 void moveBackLift() {
   bool clampControl = controller.get_digital(pros::E_CONTROLLER_DIGITAL_X);
-  bool actControl = controller.get_digital(pros::E_CONTROLLER_DIGITAL_UP);
 
   if(clampControl && !clampOn) {
     clampOn = true;
-  }
-
-  if(actControl && !actOn) {
-    actOn = true;
   } 
 
-  if(actOn) {
+  if(clampOn && !backPistonValue && !actuatorValue) {
+    backPiston.set_value(!backPistonValue);
+    pros::delay(200);
     actuator.set_value(!actuatorValue);
     pros::delay(200);
+    backPistonValue = !backPistonValue;
     actuatorValue = !actuatorValue;
-    actOn = false;
-  } 
-
-  if(clampOn) {
+    clampOn = false;
+  } else if(clampOn && backPistonValue && actuatorValue) {
+    actuator.set_value(!actuatorValue);
+    pros::delay(200);
     backPiston.set_value(!backPistonValue);
     pros::delay(200);
     backPistonValue = !backPistonValue;
+    actuatorValue = !actuatorValue;
     clampOn = false;
   }
 }
 
 void intakeMove() {
-  bool in = controller.get_digital(pros::E_CONTROLLER_DIGITAL_B);
-  bool off = controller.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN);
-
-  const int intakeSpeed = 127;
+  bool in = controller.get_digital(pros::E_CONTROLLER_DIGITAL_UP);
+  bool stop = controller.get_digital(pros::E_CONTROLLER_DIGITAL_LEFT);
+  bool out = controller.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN);
 
   if(in) {
     runningIn = true;
-  } else if(off) {
+  }
+
+  if(stop) {
     runningIn = false;
+  } 
+
+  if(out && !outAllowed) {
+    outAllowed = true;
+  }
+
+  if(out && outAllowed) {
+    intakeSpeed *= -1;
+    pros::delay(125);
+    outAllowed = false;
   } 
 
   if(runningIn) {

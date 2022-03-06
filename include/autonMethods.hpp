@@ -9,3 +9,6 @@ void turn(int degrees, int voltage);
 void turnInertial(int degrees, int voltage);
 
 void gyroPID(double angle);
+
+void swing(int units, int voltage);
+void swingRight(int units, int voltage);

@@ -64,6 +64,37 @@ void turn(int units, int voltage) {
   setDrive(0, 0);
 }
 
+void swing(int units, int voltage) {
+   resetMotorEncoders();
+
+   while(getLeftEncoder() < abs(units)) {
+       setDrive(voltage, 0);
+       pros::delay(10);
+   }
+
+   setDrive(-10, 0);
+   pros::delay(10);
+
+   setDrive(0, 0);
+}
+
+
+void swingRight(int units, int voltage) {
+   resetMotorEncoders();
+
+   while(getRightEncoder() < abs(units)) {
+       setDrive(0, voltage);
+       pros::delay(10);
+   }
+
+   setDrive(0, -10);
+   pros::delay(10);
+
+   setDrive(0, 0);
+}
+
+
+
 
 
 

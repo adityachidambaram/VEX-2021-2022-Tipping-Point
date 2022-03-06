@@ -8,3 +8,11 @@ void forwardClamp();
 void forwardAWP();
 
 void progSkill();
+
+void auton20();
+
+void auton40();
+
+void angle20();
+
+void rightMiddle();

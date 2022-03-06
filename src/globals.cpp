@@ -24,8 +24,8 @@ pros::Motor intake(4, pros::E_MOTOR_GEARSET_18, false, pros::E_MOTOR_ENCODER_ROT
 pros::ADIDigitalOut backPiston('G');
 #define DIGITAL_SENSOR_PORT 'A'
 pros::ADIDigitalOut actuator('A');
-#define DIGITAL_SENSOR_PORT 'H'
-pros::ADIDigitalOut clampPiston('H');
+#define DIGITAL_SENSOR_PORT 'D'
+pros::ADIDigitalOut clampPiston('D');
 
     
 // SENSORS
